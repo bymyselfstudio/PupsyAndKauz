@@ -13,3 +13,5 @@ riding a kayak in Unity and that was the kick-off event for that game.
 
 Another part of the game creation consists of designing and modeling the meshes
 with Blender, because I don't like to re-use other people's meshes. 
+
+tbc
