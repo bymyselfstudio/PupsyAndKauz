@@ -31,8 +31,7 @@ public class PlayerController : MonoBehaviour
     void LateUpdate()
     {
         Vector3 cameraOffset = new Vector3(0, 6.5f, -54);
-        mainCamera.transform.position = transform.position + cameraOffset;
-        mainCamera.transform.rotation = Quaternion.Euler(35, transform.rotation.y, transform.rotation.z);
+        mainCamera.transform.SetPositionAndRotation(transform.position + cameraOffset, Quaternion.Euler(35, transform.rotation.y, transform.rotation.z));
     }
 
     void SetKayakToBounds()
