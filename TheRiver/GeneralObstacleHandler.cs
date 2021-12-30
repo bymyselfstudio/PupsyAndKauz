@@ -36,11 +36,7 @@ public class GeneralObstacleHandler : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
             Crash();
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.CompareTag("DespawnArea"))
+        if (collision.gameObject.CompareTag("DespawnArea"))
             Destroy(gameObject);
     }
 
