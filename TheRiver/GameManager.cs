@@ -3,6 +3,8 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
+    // Add timer and global speed factor => as time goes by, the faster will be the movement
+    
     public static int Score { get; set; }
     [SerializeField] Text scoreText, healthText;
 
@@ -28,7 +30,6 @@ public class GameManager : MonoBehaviour
             }
         }
     }
-
 
     void Start()
     {

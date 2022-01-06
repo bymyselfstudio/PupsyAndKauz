@@ -1,19 +1,19 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 
-public class GeneralCollectableHandler : MonoBehaviour
+public class GeneralCollectableHandler : MonoBehaviour 
 {
 	enum CollectableTypes { NoType, Health, Score, LevelKey, FinalKey, PowerUp, NegativeBuff };
 	[SerializeField] CollectableTypes collectableType; // this gameObject's type
 
-	[SerializeField] private bool rotate = true; // do you want it to rotate?
-	[SerializeField] private bool move = true; // do you want it to move?
+	[SerializeField] bool rotate = true; // do you want it to rotate?
+	[SerializeField] bool move = true; // do you want it to move?
 
 	[SerializeField] Vector3 rotationCenterAxis = Vector3.up; // edit for another center axis
 	[SerializeField] Vector3 movementDirection = Vector3.back; // edit for another direction
 
-	[SerializeField] private float rotationSpeed = 80f;
-	[SerializeField] private float movementSpeed = 20f;
+	[SerializeField] float rotationSpeed = 50f;
+	[SerializeField] float movementSpeed = 20f;
 
 	[SerializeField] AudioClip collectSfx;
 	[SerializeField] GameObject collectParticles;
@@ -21,59 +21,57 @@ public class GeneralCollectableHandler : MonoBehaviour
 	private GameManager gameManager;
 
 
-	private void Awake()
-	{
+    private void Awake()
+    {
 		gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
-	}
+    }
 
-	void Update()
+    void Update() 
 	{
 		if (rotate)
-			transform.Rotate(rotationSpeed * Time.deltaTime * rotationCenterAxis, Space.Self);
+			transform.Rotate (rotationSpeed * Time.deltaTime * rotationCenterAxis, Space.Self);
 		if (move)
 			transform.Translate(movementSpeed * Time.deltaTime * movementDirection, Space.World);
 	}
 
 	void OnTriggerEnter(Collider other)
 	{
-		if (other.gameObject.CompareTag("Player"))
+		if (other.gameObject.CompareTag("Player")) 
 			Collect();
-		if (other.gameObject.CompareTag("DespawnArea"))
-			Destroy(gameObject);
 	}
 
 	private void Collect()
 	{
-		if (collectSfx)
+		if(collectSfx)
 			AudioSource.PlayClipAtPoint(collectSfx, transform.position);
-		if (collectParticles)
+		if(collectParticles)
 			Instantiate(collectParticles, transform.position, Quaternion.identity);
 
-		switch (collectableType)
-		{
-			case CollectableTypes.NoType:
+        switch (collectableType)
+        {
+            case CollectableTypes.NoType:
 				//Add in code here;
 				Debug.Log("Do NoType Command");
 				Destroy(gameObject);
 				break;
-			case CollectableTypes.Health:
+            case CollectableTypes.Health:
 				gameManager.AddHealth(20);
 				Destroy(gameObject);
 				break;
-			case CollectableTypes.Score:
+            case CollectableTypes.Score:
 				gameManager.AddScore(15);
 				Destroy(gameObject);
 				break;
-			case CollectableTypes.LevelKey:
+            case CollectableTypes.LevelKey:
 				Debug.Log("You got the Level Key!");
 				Destroy(gameObject);
 				break;
-			case CollectableTypes.FinalKey:
+            case CollectableTypes.FinalKey:
 				//Add in code here;
 				Debug.Log("Do FinalKey Command");
 				Destroy(gameObject);
 				break;
-			case CollectableTypes.PowerUp:
+            case CollectableTypes.PowerUp:
 				//Add in code here;
 				Debug.Log("Do PowerUp Command");
 				Destroy(gameObject);
@@ -83,7 +81,7 @@ public class GeneralCollectableHandler : MonoBehaviour
 				Debug.Log("Do NegativeBuff Command");
 				Destroy(gameObject);
 				break;
-		}
+        }
 
-	}
+    }
 }

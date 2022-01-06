@@ -3,18 +3,21 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private float xRangeCorrection = 1.8f;
-    [SerializeField] Camera mainCamera;
+    [SerializeField] private Camera mainCamera;
+    [SerializeField] private GameObject water;
+    private Transform kayak;
     private float xRange;
     private float horizontalMovement;
     private readonly float xPlayerSpeed = 18;
     private readonly float leaningAngle = 12.5f;
-    private Transform kayak;
+    private float cameraRotationX = 35;
+    private Vector3 cameraOffset = new Vector3(0, 6, -8);
 
 
     private void Awake()
     {
-        xRange = GameObject.Find("Water").GetComponent<Collider>().bounds.size.x / 2;
-        kayak = GetComponentInChildren<Transform>();
+        xRange = water.GetComponent<Collider>().bounds.size.x / 2;
+        kayak = GetComponent<Transform>();
     }
 
     void Update()
@@ -22,16 +25,17 @@ public class PlayerController : MonoBehaviour
         horizontalMovement = Input.GetAxis("Horizontal");
 
         // maybe better performance with rigidbody and FixedUpdate()
-        transform.Translate(new Vector3(horizontalMovement, 0, 0) * xPlayerSpeed * Time.deltaTime, Space.World);
+        transform.Translate(xPlayerSpeed * Time.deltaTime * new Vector3(horizontalMovement, 0, 0), Space.World);
         
         SetKayakToBounds();
+
+        // should not happen before game is started!
         LeaningKayak();
     }
 
     void LateUpdate()
     {
-        Vector3 cameraOffset = new Vector3(0, 6.5f, -54);
-        mainCamera.transform.SetPositionAndRotation(transform.position + cameraOffset, Quaternion.Euler(35, transform.rotation.y, transform.rotation.z));
+        mainCamera.transform.SetPositionAndRotation(transform.position + cameraOffset, Quaternion.Euler(cameraRotationX, transform.rotation.y, transform.rotation.z));
     }
 
     void SetKayakToBounds()

@@ -2,8 +2,7 @@ using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
 {
-    // implement DespawnArea script --> first attempt didn't work
-    // events will just get triggered if assigned to trigger object --> either spawnItems or despawner
+    // implement DespawnArea script -- DONE
     
     // implement levelKey spawn when level score is reached
     // implement method which checks if heartPrefab is active, so no other heart should spawn

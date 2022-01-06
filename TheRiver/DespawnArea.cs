@@ -1,10 +1,8 @@
-// OBSOLETE! 
-
 using UnityEngine;
 
 public class DespawnArea : MonoBehaviour
 {
-    // implemented in GeneralObstacleHandler & GeneralCollectableHandler
+    // implement in SpawnManager script
     
     private void OnTriggerEnter(Collider other)
     {
