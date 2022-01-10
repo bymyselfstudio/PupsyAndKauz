@@ -13,6 +13,7 @@ public class SpawnManager : MonoBehaviour
     private readonly float xRange = 8.0f;
     private readonly float zRangeMax = 80.0f;
     private readonly float zRangeMin = 60.0f;
+    private readonly float firstSpawnDelay = 0.5f;
 
     private void Awake()
     {
@@ -21,7 +22,7 @@ public class SpawnManager : MonoBehaviour
 
     void Start()
     {
-        InvokeRepeating("RandomSpawnItem", 0.5f, gameManager.spawnRepeatTime);
+        InvokeRepeating("RandomSpawnItem", firstSpawnDelay, gameManager.spawnRepeatTime);
     }
 
     private void RandomSpawnItem()
@@ -32,7 +33,7 @@ public class SpawnManager : MonoBehaviour
     
     private Vector3 RandomSpawnPosition()
     {
-        // several models don't match the local unity orientation, so spawnpos is not set correctly!
+        // several models don't match the local unity orientation, so spawnpos is not set correctly! => was fixed due setting right prefabs location
         float ySpawnPos = ((float)Space.Self); // only works with correct local orientation!
         float xSpawnPos = Random.Range(-xRange, xRange);
         float zSpawnPos = Random.Range(zRangeMin, zRangeMax);

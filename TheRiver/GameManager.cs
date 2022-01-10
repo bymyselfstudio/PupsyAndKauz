@@ -27,10 +27,10 @@ public class GameManager : MonoBehaviour
     #endregion
 
     [SerializeField] Text scoreText, healthText, timerText;
-    [SerializeField] SpawnManager spawnManager;
     [HideInInspector] public bool isStopwatchRunning = false;
-    [Range(1, 4)] public int pace;
+    [Range(1, 5)] public int pace;
     public float spawnRepeatTime;
+    public float xPlayerSpeed;
     private float currentTime;
 
     public int Score { get; set; }
@@ -86,7 +86,8 @@ public class GameManager : MonoBehaviour
         Health = 100;
         currentTime = 0;
         pace = 2;
-        spawnRepeatTime = 1.5f;
+        spawnRepeatTime = 0.5f;
+        xPlayerSpeed = 20;
 
         scoreText.text = "Score: " + Score.ToString();
         healthText.text = "Health: " + Health.ToString();
@@ -111,15 +112,23 @@ public class GameManager : MonoBehaviour
         {
             case 1:
                 spawnRepeatTime = 0.6f;
+                xPlayerSpeed = 18;
                 break;
             case 2:
                 spawnRepeatTime = 0.7f;
+                xPlayerSpeed = 20;
                 break;
             case 3:
                 spawnRepeatTime = 0.8f;
+                xPlayerSpeed = 22;
                 break;
             case 4:
-                spawnRepeatTime = 0.1f;
+                spawnRepeatTime = 0.9f;
+                xPlayerSpeed = 25;
+                break;
+            case 5:
+                spawnRepeatTime = 1f;
+                xPlayerSpeed = 30;
                 break;
 
         }

@@ -15,8 +15,8 @@ public class KayakHealthIndicator : MonoBehaviour
         colorArray[2] = new Color(0.7529413f, 0.9803922f, 0.1960784f);  // yellow
         colorArray[3] = new Color(0.2196079f, 0.5882353f, 0.1372549f);  // green    
         #endregion
-        m_PropertyBlock = new MaterialPropertyBlock();
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        m_PropertyBlock = new MaterialPropertyBlock();
         kayak = GetComponent<Renderer>();
     }
 

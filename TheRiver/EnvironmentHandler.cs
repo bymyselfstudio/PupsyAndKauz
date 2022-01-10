@@ -6,21 +6,23 @@ public class EnvironmentHandler : MonoBehaviour
     [SerializeField] private Vector3 moveDirection = Vector3.back;
     private Vector3 startPos;
     private float repeatPos;
-    
+    private GameManager gameManager;
 
-    void Start()
+    private void Awake()
     {
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         startPos = transform.position;
         repeatPos = GameObject.Find("Water").GetComponent<Collider>().bounds.size.z / 2;
     }
 
     void Update()
     {
-        transform.Translate(speed * Time.deltaTime * moveDirection);
+        transform.Translate((speed * gameManager.pace) * Time.deltaTime * moveDirection);
 
         if (transform.position.z < -repeatPos + 20)
         {
             transform.position = startPos;
         }
     }
+
 }

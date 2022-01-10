@@ -2,23 +2,20 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private float xRangeCorrection = 1.8f;
+    [SerializeField] private float xRangeCorrection = 3f;
     [SerializeField] private Camera mainCamera;
     [SerializeField] private GameObject water;
-    private Transform kayak;
     private float xRange;
     private float horizontalMovement;
-    private readonly float xPlayerSpeed = 18;
-    private readonly float tiltAngle = 12.5f;
-    private float cameraRotationX = 35;
-    private Vector3 cameraOffset = new Vector3(0, 6, -8);
+    private readonly float tiltAngle = 13f;
+    private float cameraRotationX = 32;
+    private Vector3 cameraOffset = new Vector3(0, 3.7f, -6);
     private GameManager gameManager;
 
 
     private void Awake()
     {
         xRange = water.GetComponent<Collider>().bounds.size.x / 2;
-        kayak = GetComponent<Transform>();
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
 
@@ -27,7 +24,7 @@ public class PlayerController : MonoBehaviour
         horizontalMovement = Input.GetAxis("Horizontal");
 
         // maybe better performance with rigidbody and FixedUpdate()
-        transform.Translate(xPlayerSpeed * Time.deltaTime * new Vector3(horizontalMovement, 0, 0), Space.World);
+        transform.Translate(gameManager.xPlayerSpeed * Time.deltaTime * new Vector3(horizontalMovement, 0, 0), Space.World);
         
         SetKayakToBounds();
 
@@ -58,19 +55,19 @@ public class PlayerController : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.D))
             {
-                kayak.transform.Rotate(Vector3.forward * -tiltAngle, Space.Self);
+                transform.Rotate((Vector3.forward * -tiltAngle), Space.Self);
             }
             else if (Input.GetKeyUp(KeyCode.D))
             {
-                kayak.transform.Rotate(Vector3.forward * tiltAngle, Space.Self);
+                transform.Rotate(Vector3.forward * tiltAngle, Space.Self);
             }
             else if (Input.GetKeyDown(KeyCode.A))
             {
-                kayak.transform.Rotate(Vector3.forward * tiltAngle, Space.Self);
+                transform.Rotate(Vector3.forward * tiltAngle, Space.Self);
             }
             else if (Input.GetKeyUp(KeyCode.A))
             {
-                kayak.transform.Rotate(Vector3.forward * -tiltAngle, Space.Self);
+                transform.Rotate(Vector3.forward * -tiltAngle, Space.Self);
             }
         }
         else
