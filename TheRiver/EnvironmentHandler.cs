@@ -6,7 +6,7 @@ public class EnvironmentHandler : MonoBehaviour
     [SerializeField] private Vector3 moveDirection = Vector3.back;
     private Vector3 startPos;
     private float repeatPos;
-    
+
 
     void Start()
     {

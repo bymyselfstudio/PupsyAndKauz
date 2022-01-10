@@ -3,7 +3,7 @@ using UnityEngine;
 public class SpawnManager : MonoBehaviour
 {
     // implement DespawnArea script -- DONE
-    
+
     // implement levelKey spawn when level score is reached
     // implement method which checks if heartPrefab is active, so no other heart should spawn
 
@@ -23,7 +23,7 @@ public class SpawnManager : MonoBehaviour
         int itemIndex = Random.Range(0, obstablePrefabs.Length);
         Instantiate(obstablePrefabs[itemIndex], RandomSpawnPosition(), obstablePrefabs[itemIndex].transform.rotation);
     }
-    
+
     private Vector3 RandomSpawnPosition()
     {
         // several models don't match the local unity orientation, so spawnpos is not set correctly!

@@ -2,14 +2,14 @@ using UnityEngine;
 
 public class GeneralObstacleHandler : MonoBehaviour
 {
-    enum ObstacleTypes { NoType, Rock, Can, WoodPile, Barrel, Sealillie};
+    enum ObstacleTypes { NoType, Rock, Can, WoodPile, Barrel, Sealillie };
     [SerializeField] ObstacleTypes obstacleType; // this gameObject's type
 
     [SerializeField] bool rotate = false;
     [SerializeField] bool move = true;
 
     [SerializeField] float rotationSpeed = 0;
-    [SerializeField] float movementSpeed = 12;
+    public float movementSpeed = 12;
 
     [SerializeField] Vector3 rotationCenterAxis = Vector3.up;
     [SerializeField] Vector3 movementDirection = Vector3.back;
@@ -17,7 +17,7 @@ public class GeneralObstacleHandler : MonoBehaviour
     [SerializeField] AudioClip obstacleCrash;
     [SerializeField] GameObject crashParticles;
 
-    GameManager gameManager;
+    private GameManager gameManager;
 
     private void Awake()
     {
@@ -30,7 +30,7 @@ public class GeneralObstacleHandler : MonoBehaviour
         if (rotate)
             transform.Rotate(rotationSpeed * Time.deltaTime * rotationCenterAxis, Space.Self);
         if (move)
-                transform.Translate(movementSpeed * Time.deltaTime * movementDirection, Space.World);
+            transform.Translate((movementSpeed * gameManager.pace) * Time.deltaTime * movementDirection, Space.World);
     }
 
     private void OnCollisionEnter(Collision collision)
