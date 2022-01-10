@@ -28,7 +28,7 @@ public class PlayerController : MonoBehaviour
 
         // maybe better performance with rigidbody and FixedUpdate()
         transform.Translate(xPlayerSpeed * Time.deltaTime * new Vector3(horizontalMovement, 0, 0), Space.World);
-
+        
         SetKayakToBounds();
 
         // should not happen before game is started!
@@ -77,6 +77,6 @@ public class PlayerController : MonoBehaviour
         {
             return;
         }
-
+        
     }
 }
