@@ -1,15 +1,38 @@
 using UnityEngine;
 using UnityEngine.UI;
+using System;
 
 public class GameManager : MonoBehaviour
 {
-    // Add timer and global speed factor => as time goes by, the faster will be the movement
-    
-    public static int Score { get; set; }
-    [SerializeField] Text scoreText, healthText;
+    #region TODO'S
+    /* Add global speed factor -- DONE
+     * Add timer -- DONE
+     * Tilting kayak should not happen before game start! -- DONE
+     * Fíx leaning bug, where kayak stays in leaning position for some reason
+     * Add countdown timer
+     * Add level counter (so player knows which level he is)
+     * Add tree and plants spawner
+     * Create new environment
+     * Connect kayak color with health value => orange for middle damage, yellow for almost done
+     * Healthbar might be a classic healthbar with visible hearts in UI relating to health value
+     * After several seconds the game should increase pace
+     * Increase spawnrate when game is faster
+     * Add yellow heart for bulletproof mode for 5 seconds => starts at level pace 3
+     * Correct camera position to see more in the front
+     * Correct UI elements to fit in any display resolution
+     */
+    #endregion
 
-    private static int health;
-    public static int Health
+    [SerializeField] Text scoreText, healthText, timerText;
+    [Range(1, 5)] public float pace = 1;
+    private float currentTime;
+    public bool isStopwatchRunning = false;
+
+
+    public int Score { get; set; }
+
+    private int health;
+    public int Health
     {
         get
         {
@@ -18,7 +41,7 @@ public class GameManager : MonoBehaviour
         set
         {
             health = value;
-            
+
             if (health >= 100)
             {
                 health = 100;
@@ -38,6 +61,7 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
+        Stopwatch();
         scoreText.text = "Score: " + Score.ToString();
         healthText.text = "Health: " + Health.ToString();
     }
@@ -56,8 +80,22 @@ public class GameManager : MonoBehaviour
     {
         Score = 0;
         Health = 100;
+        currentTime = 0;
 
         scoreText.text = "Score: " + Score.ToString();
         healthText.text = "Health: " + Health.ToString();
+        timerText.tag = currentTime.ToString(@"mm\:ss\:fff");
     }
+
+    public void Stopwatch()
+    {
+        currentTime += Time.deltaTime;
+        TimeSpan timer = TimeSpan.FromSeconds(currentTime);
+        timerText.text = timer.ToString(@"mm\:ss\:fff"); // UI text needed for this line
+        if (currentTime > 1.0f)
+        {
+            isStopwatchRunning = true;
+        }
+    }
+
 }
