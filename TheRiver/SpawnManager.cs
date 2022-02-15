@@ -2,11 +2,9 @@ using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
 {
-    // implement DespawnArea script -- DONE
-    
+    // implement in GameManager
     // implement levelKey spawn when level score is reached
     // implement method which checks if heartPrefab is active, so no other heart should spawn
-
 
     [SerializeField] GameObject[] obstablePrefabs;
     private GameManager gameManager;
@@ -22,6 +20,7 @@ public class SpawnManager : MonoBehaviour
 
     void Start()
     {
+        // work with coroutine instead!
         InvokeRepeating("RandomSpawnItem", firstSpawnDelay, gameManager.spawnRepeatTime);
     }
 
