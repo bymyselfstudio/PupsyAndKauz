@@ -29,7 +29,7 @@ public class PlayerController : MonoBehaviour
         SetKayakToBounds();
 
         // should not happen before game is started!
-        TiltKayak(gameManager.isStopwatchRunning);
+        TiltKayak();
     }
 
     void LateUpdate()
@@ -40,40 +40,20 @@ public class PlayerController : MonoBehaviour
     void SetKayakToBounds()
     {
         if (transform.position.x < (-xRange + xRangeCorrection))
-        {
             transform.position = new Vector3(-xRange + xRangeCorrection, transform.position.y, transform.position.z);
-        }
         else if (transform.position.x > (xRange - xRangeCorrection))
-        {
             transform.position = new Vector3(xRange - xRangeCorrection, transform.position.y, transform.position.z);
-        }
     }
 
-    void TiltKayak(bool _isStopwatchRunning)
+    void TiltKayak()
     {
-        if (_isStopwatchRunning)
-        {
-            if (Input.GetKeyDown(KeyCode.D))
-            {
-                transform.Rotate((Vector3.forward * -tiltAngle), Space.Self);
-            }
-            else if (Input.GetKeyUp(KeyCode.D))
-            {
-                transform.Rotate(Vector3.forward * tiltAngle, Space.Self);
-            }
-            else if (Input.GetKeyDown(KeyCode.A))
-            {
-                transform.Rotate(Vector3.forward * tiltAngle, Space.Self);
-            }
-            else if (Input.GetKeyUp(KeyCode.A))
-            {
-                transform.Rotate(Vector3.forward * -tiltAngle, Space.Self);
-            }
-        }
-        else
-        {
-            return;
-        }
-        
+        if (Input.GetKeyDown(KeyCode.D))
+            transform.Rotate((Vector3.forward * -tiltAngle), Space.Self);
+        else if (Input.GetKeyUp(KeyCode.D))
+            transform.Rotate(Vector3.forward * tiltAngle, Space.Self);
+        else if (Input.GetKeyDown(KeyCode.A))
+            transform.Rotate(Vector3.forward * tiltAngle, Space.Self);
+        else if (Input.GetKeyUp(KeyCode.A))
+            transform.Rotate(Vector3.forward * -tiltAngle, Space.Self);
     }
 }
