@@ -8,12 +8,11 @@ public class GameManager : MonoBehaviour
     /* Add global speed factor -- DONE
      * Add timer -- DONE
      * Connect kayak color with health value -- DONE
-     * Tilting kayak should not happen before game start! -- DONE
      * 
      * After several seconds the game should increase pace
      * Increase spawnrate when game is faster
      * 
-     * Fíx tilt bug, where kayak stays in tilted position for some reason
+     * FÃ­x tilt bug, where kayak stays in tilted position for some reason
      * Add countdown timer
      * Add level counter (so player knows which level he is)
      * Add tree and plants spawner
@@ -27,11 +26,10 @@ public class GameManager : MonoBehaviour
     #endregion
 
     [SerializeField] Text scoreText, healthText, timerText;
-    [HideInInspector] public bool isStopwatchRunning = false;
     [Range(1, 5)] public int pace;
     public float spawnRepeatTime;
     public float xPlayerSpeed;
-    private float currentTime;
+    public float currentTime;
 
     public int Score { get; set; }
     private int health;
@@ -52,7 +50,6 @@ public class GameManager : MonoBehaviour
             else if (health <= 0)
             {
                 health = 0;
-                Debug.Log("GAME OVER!");
             }
         }
     }
@@ -66,18 +63,18 @@ public class GameManager : MonoBehaviour
     {
         Stopwatch();
         CheckPace();
-        scoreText.text = "Score: " + Score.ToString();
-        healthText.text = "Health: " + Health.ToString();
     }
 
     public void AddScore(int _scoreToAdd)
     {
         Score += _scoreToAdd;
+        scoreText.text = "Score: " + Score.ToString();
     }
 
     public void AddHealth(int _healthToAdd)
     {
         Health += _healthToAdd;
+        healthText.text = "Health: " + Health.ToString();
     }
 
     public void ResetUI()
@@ -99,11 +96,6 @@ public class GameManager : MonoBehaviour
         currentTime += Time.deltaTime;
         TimeSpan timer = TimeSpan.FromSeconds(currentTime);
         timerText.text = timer.ToString(@"mm\:ss\:fff"); // UI text needed for this line
-
-        if (currentTime > 1.0f)
-        {
-            isStopwatchRunning = true;
-        }
     }
 
     void CheckPace()
