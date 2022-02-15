@@ -2,7 +2,8 @@ using UnityEngine;
 
 public class DespawnArea : MonoBehaviour
 {
-    // implement in SpawnManager script
+    // implement in GameManager script
+    // make dependend on visible area, no collision detection needed
     
     private void OnTriggerEnter(Collider other)
     {
