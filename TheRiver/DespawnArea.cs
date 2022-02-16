@@ -1,9 +1,7 @@
 using UnityEngine;
 
 public class DespawnArea : MonoBehaviour
-{
-    // implement in SpawnManager script
-    
+{ 
     private void OnTriggerEnter(Collider other)
     {
         Destroy(other.gameObject);
