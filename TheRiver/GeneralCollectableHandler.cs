@@ -18,13 +18,12 @@ public class GeneralCollectableHandler : MonoBehaviour
 	[SerializeField] AudioClip collectSfx;
 	[SerializeField] GameObject collectParticles;
 
-	private GameManager gameManager;
-
+	GameManager gameManager;
 
     private void Awake()
     {
 		gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
-    }
+	}
 
     void Update() 
 	{
@@ -38,6 +37,7 @@ public class GeneralCollectableHandler : MonoBehaviour
 	{
 		if (other.gameObject.CompareTag("Player")) 
 			Collect();
+        
 	}
 
 	private void Collect()
@@ -63,8 +63,9 @@ public class GeneralCollectableHandler : MonoBehaviour
 				Destroy(gameObject);
 				break;
             case CollectableTypes.LevelKey:
-				Debug.Log("You got the Level Key!");
+				Debug.Log("Level key collected!");
 				Destroy(gameObject);
+				gameManager.isLevelKeyCollected = true;
 				break;
             case CollectableTypes.FinalKey:
 				//Add in code here;

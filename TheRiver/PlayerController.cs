@@ -7,16 +7,18 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private GameObject water;
     private float xRange;
     private float horizontalMovement;
-    private readonly float tiltAngle = 13f;
-    private float cameraRotationX = 32;
-    private Vector3 cameraOffset = new Vector3(0, 3.7f, -6);
+    private readonly float tiltAngle = 12f;
+    private float cameraRotationX = 33;
+    private Vector3 cameraOffset = new Vector3(0, 2.4f, -4.7f);
     private GameManager gameManager;
+    private AudioSource poleInWater;
 
 
     private void Awake()
     {
         xRange = water.GetComponent<Collider>().bounds.size.x / 2;
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        poleInWater = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -48,12 +50,27 @@ public class PlayerController : MonoBehaviour
     void TiltKayak()
     {
         if (Input.GetKeyDown(KeyCode.D))
+        {
             transform.Rotate((Vector3.forward * -tiltAngle), Space.Self);
+            poleInWater.Play();
+        }
+            
         else if (Input.GetKeyUp(KeyCode.D))
+        {
             transform.Rotate(Vector3.forward * tiltAngle, Space.Self);
+            poleInWater.Play();
+        }
+           
         else if (Input.GetKeyDown(KeyCode.A))
+        {
             transform.Rotate(Vector3.forward * tiltAngle, Space.Self);
+            poleInWater.Play();
+        }
+            
         else if (Input.GetKeyUp(KeyCode.A))
+        {
             transform.Rotate(Vector3.forward * -tiltAngle, Space.Self);
+            poleInWater.Play();
+        }     
     }
 }

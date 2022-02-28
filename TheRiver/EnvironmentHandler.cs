@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class EnvironmentHandler : MonoBehaviour
 {
-    [SerializeField] private float speed = 20;
+    public float speed = 20;
     [SerializeField] private Vector3 moveDirection = Vector3.back;
     private Vector3 startPos;
     private float repeatPos;

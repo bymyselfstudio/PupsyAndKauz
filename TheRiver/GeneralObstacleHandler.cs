@@ -17,7 +17,7 @@ public class GeneralObstacleHandler : MonoBehaviour
     [SerializeField] AudioClip obstacleCrash;
     [SerializeField] GameObject crashParticles;
 
-    private GameManager gameManager;
+    GameManager gameManager;
 
     private void Awake()
     {
