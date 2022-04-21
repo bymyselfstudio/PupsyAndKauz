@@ -1,3 +1,7 @@
+UPDATE 22/4
+
+THIS PROJECT WAS CANCELED! NO FURTHER UPDATES!
+
 # Pupsy & Kauz - Chase Of The Heart Key
 
 This project is a game, based on several mini games and a story behind.
@@ -15,5 +19,3 @@ game mechanics.
 Another part of the game creation consists of designing and modeling the assets
 with Blender, because I don't like to re-use other people's assets. 
 The issue is that I'm a total beginner with Blender and need to learn 3D skills as well.
-
-tbc
